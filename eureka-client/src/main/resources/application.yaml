@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: eureka-client
+server:
+  port: 0
+eureka:
+  client:
+    service-url: # указываем url по которому клиент будет искать свой сервер
+      default-zone: ${EUREKA_URI:http://localhost:8761/eureka} # укажите явный маршрут к серверу eureka (service-url)
+    enabled: true # Включить/отключить регистрацию можно с помощью свойства
+    eureka-server-connect-timeout-seconds: 5 # время ожидания (в секундах) до истечения тайм-аута соединения с Eureka Server
+    eureka-server-read-timeout-seconds: 8 # время ожидания (в секундах) до истечения тайм-аута чтения с Eureka Server
+    eureka-server-total-connections: 200 # общее количество подключений, разрешенных от клиента ко всем серверам
+    eureka-server-total-connections-per-host: 50 # общее количество подключений, разрешенных от клиента к определенному серверу
+    eureka-service-url-poll-interval-seconds: 35 # как часто (в секундах) необходимо запрашивать изменения об информации с сервера
+    prefer-same-zone-eureka: true # Клиент будет предпочитать сервер Eureka в той же зоне, если такой сервер доступен
+  instance:
+    prefer-ip-address: true # использовать IP адрес
+    lease-renewal-interval-in-seconds: 30 # Каждые 30 секунд клиент шлет запрос на сервер и информирует сервер о том, что экземпляр еще жив
+    lease-expiration-duration-in-seconds: 90 # Если Eureka Server не видел обновления в течение 90 секунд, он удаляет экземпляр из своего реестра
